@@ -114,7 +114,8 @@ HALLTICKET (NEW V2)/
 
 ## 📸 Screenshots (Optional)
 
-![Screenshot 2025-04-18 120226](https://github.com/user-attachments/assets/55c84166-6480-4234-b861-19cf84d50810)
+
+![Screenshot 2025-04-18 114549](https://github.com/user-attachments/assets/884ff913-ff15-488e-9b71-c15604f182d4)
 
 
 ---
