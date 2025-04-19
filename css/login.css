@@ -1,0 +1,58 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+/* Content Div Styles */
+.content-div {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.content-div .title {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    color: #004080;
+    font-weight: bold;
+}
+
+.content-div form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.content-div input[type="text"],
+.content-div input[type="password"] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.content-div input[type="text"]:focus,
+.content-div input[type="password"]:focus {
+    border-color: #004080;
+}
+
+.content-div button {
+    padding: 12px;
+    background-color: #004080;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.content-div button:hover {
+    background-color: #003366;
+}

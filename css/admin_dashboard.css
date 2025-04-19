@@ -1,0 +1,197 @@
+body {
+    font-family: 'museo_slab700';
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+/* Main Heading Styling */
+h2 {
+    color: #2c3e50;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 24px;
+}
+
+.admin-dashboard{
+    background-color: white;
+    margin-top: 100px;
+}
+/* Requests Container Styling */
+.requests-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Individual Request Container Styling */
+.request-container {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 300px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.request-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Student Details Styling */
+.request-container p {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #555;
+    width: 100%;
+    text-align: left;
+}
+
+.request-container p strong {
+    color: #2c3e50;
+}
+
+/* Student Photo Styling */
+.request-container img {
+    max-width: 100%;
+    border-radius: 8px;
+    display: block;
+    margin: 10px auto;
+    border: 1px solid #ddd;
+}
+
+/* Button Styling */
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+button[name="reject"] {
+    background-color: #dc3545;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* No Requests Message Styling */
+.no-requests {
+    color: #666;
+    font-style: italic;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+/* Logout Link Styling */
+.logout-link {
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    width: fit-content;
+    transition: background-color 0.3s;
+}
+
+.logout-link:hover {
+    background-color: #c82333;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .request-container {
+        max-width: 100%;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .request-container p {
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 12px;
+    }
+}
+.title{
+    color: #000000;
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 30px;
+}
+.section{
+    color: #000000;
+    margin-top: 135px;
+    position: fixed;
+}
+.navbar{
+    height: 135px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    min-width: 720px;
+    position: fixed;
+    top: 0;
+    border-bottom: 0.1px solid #d8d0d0;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 720px;
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+#jnt-logo,#jnt-naac{
+    height: 100px;
+    width: 100px;
+}
+.jntua-name{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+#jntu-name{
+    font-size: 2rem;
+    margin: 0;
+}
+#jntu-address{
+    font-size: 1rem;
+    margin: 0;
+}
+#jntu-iso{
+    font-size: 1rem;
+    margin: 0;
+}

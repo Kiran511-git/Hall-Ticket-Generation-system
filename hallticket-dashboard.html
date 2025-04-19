@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Hallticket Generation</title>
+    <link rel="stylesheet" href="/HallTicket(New v2)/css/stylehallticket.css">
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="jntua-logo"><img id="jnt-logo" src="jntuacea-logo.png" alt="jntuacea-logo"></div>
+            <div class="jntua-name">
+                <h2 id="jntu-name">JNTUA College of Engineering (Autonomous) Ananthapuramu</h2>
+                <p id="jntu-address">Sri Mokshagundam Vishveshwaraiah Road,Ananthapuram,Andhra Pradesh-515002, India.
+                </p>
+                <p id="jntu-iso">An ISO 9001:2015 Certified Institution</p>
+            </div>
+            <div class="naac-logo"><img id="jnt-naac" src="jntuacea-naac.png" alt="NAAC-logo"></div>
+        </div>   
+    </header>
+    <div class="content">
+        <div class="content-div">
+            <h1 class="title">Welcome to Automated Hallticket Generation</h1> <br><br>
+            <form method="POST" action="submit-hallticket.php" enctype="multipart/form-data">
+                <div class="container">
+                    <table class="tabledata">
+                        <tr>
+                            <td class="form-text">Enter Admission No:</td>
+                            <td><input name="s-admi" type="text" placeholder="Enter Admission Number..." required></td>
+                        </tr>
+                        <tr>
+                            <td class="form-text">Enter Name:</td>
+                            <td><input name="s-name" type="text" placeholder="Enter Name..." required></td>
+                        </tr>
+                        <tr>
+                            <td class="form-text">Enter Father Name:</td>
+                            <td><input name="f-name" type="text" placeholder="Enter Father Name..." required></td>
+                        </tr>
+                        <tr>
+                            <td class="form-text">Select Regulation:</td>
+                            <td>
+                                <select name="exam-reg" id="s-reg" required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="R20">R20</option>
+                                    <option value="R23">R23</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-text">Select Course:</td>
+                            <td>
+                                <select name="s-course" id="s-course" required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="BTech">B.Tech</option>
+                                    <option value="MTech">M.Tech</option>
+                                    <option value="MCA">M.C.A</option>
+                                    <option value="MBA">M.B.A</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-text">Select Branch:</td>
+                            <td>
+                                <select name="s-branch" id="s-branch" required>
+                                    <option value="" disabled selected>Select Course First</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-text">Enter Semester:</td>
+                            <td><input name="s-sem" type="number" placeholder="Enter Semester..." id="s-sem" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-text">Exam Type:</td>
+                            <td>
+                                <select name="exam-type" id="exam-type" required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="Regular">Regular</option>
+                                    <option value="Supplementary">Supplementary</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr id="supplementary-subjects-row" style="display: none;">
+                            <td class="form-text">Select Supplementary Subjects:</td>
+                            <td id="supplementary-subjects" style="width: fit-content;"></td>
+                        </tr>
+                        <tr>
+                            <td class="form-text">Upload Photo:</td>
+                            <td><input name="s-photo" type="file" accept="image/*" alt="Choose Photo" required /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><button name="submit_request" id="btn" type="submit">Generate HallTicket</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </form> 
+        </div>
+    </div>
+    <a href="student_dashboard.php" class="back-btn">Back</a>
+
+    <script>
+        const branches = {
+            'BTech': ['CSE', 'MEC', 'EEE', 'ECE', 'CIV'],
+            'MTech': ['CSE', 'EEE', 'VLSI', 'Thermal'],
+            'MCA': ['General'],
+            'MBA': ['Finance', 'Marketing']
+        };
+
+        const courseSelect = document.getElementById('s-course');
+        const branchSelect = document.getElementById('s-branch');
+        const examTypeSelect = document.getElementById('exam-type');
+        const supplementarySubjectsRow = document.getElementById('supplementary-subjects-row');
+        const supplementarySubjectsCell = document.getElementById('supplementary-subjects');
+
+        // Populate branch options based on selected course
+        courseSelect.addEventListener('change', () => {
+            const selectedCourse = courseSelect.value;
+            branchSelect.innerHTML = '<option value="" disabled selected>Select</option>';
+
+            if (branches[selectedCourse]) {
+                branches[selectedCourse].forEach(branch => {
+                    const option = document.createElement('option');
+                    option.value = branch;
+                    option.textContent = branch;
+                    branchSelect.appendChild(option);
+                });
+            }
+        });
+document.addEventListener("DOMContentLoaded", function () {
+    const examTypeSelect = document.getElementById('exam-type');
+    const supplementarySubjectsRow = document.getElementById('supplementary-subjects-row');
+    const supplementarySubjectsCell = document.getElementById('supplementary-subjects');
+
+    // Show supplementary subjects when exam type is "Supplementary"
+    examTypeSelect.addEventListener('change', () => {
+        if (examTypeSelect.value === 'Supplementary') {
+            supplementarySubjectsRow.style.display = 'table-row';
+            fetchSupplementarySubjects();
+        } else {
+            supplementarySubjectsRow.style.display = 'none';
+        }
+    });
+
+    // Fetch supplementary subjects from submit.php
+    function fetchSupplementarySubjects() {
+        const regulation = document.getElementById('s-reg').value;
+        const course = document.getElementById('s-course').value;
+        const branch = document.getElementById('s-branch').value;
+        const semester = document.getElementById('s-sem').value;
+
+        if (!regulation || !course || !branch || !semester) {
+            alert('Please select regulation, course, branch, and semester first.');
+            return;
+        }
+        console.log(`Fetching: submit.php?regulation=${regulation}&course=${course}&branch=${branch}&semester=${semester}`);
+
+        fetch(`submit.php?regulation=${regulation}&course=${course}&branch=${branch}&semester=${semester}`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.subjects && data.subjects.length > 0) {
+            // Clear previous content
+            supplementarySubjectsCell.innerHTML = '';
+
+            // Add new checkboxes
+            data.subjects.forEach(subject => {
+                const label = document.createElement('label');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'supplementary-subjects[]';
+                checkbox.value = subject;
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(subject));
+                supplementarySubjectsCell.appendChild(label);
+            });
+
+            console.log("Checkboxes added:", data.subjects); // Debugging
+        } else {
+            console.error("No subjects found.");
+        }
+    })
+    .catch(error => {
+        console.error("Error fetching subjects:", error);
+    });
+    }
+});
+    </script>
+</body>
+
+</html>
